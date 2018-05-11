@@ -48,7 +48,7 @@ public class ConnectionFactoryConfigure {
      */
     @Bean
     public CachingConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(this.host, this.port);
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(this.host,this.port);
         connectionFactory.setUsername(this.username);
         connectionFactory.setPassword(this.password);
         connectionFactory.setVirtualHost(this.virtualHost);
@@ -103,8 +103,6 @@ public class ConnectionFactoryConfigure {
     }
 
 
-
-
     /**
      * --------------------定义queue_two------------------------------------------------
      */
@@ -132,13 +130,9 @@ public class ConnectionFactoryConfigure {
     }
 
 
-
     /**
-     queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象
-     * @date:2017/9/1
-     * @className:ConnectionFactory
-     * @author:Administrator
-     * @description:
+     * queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象
+     * @return
      */
     @Bean
     public SimpleMessageListenerContainer simpleMessageListenerContainer_one(){
@@ -148,7 +142,7 @@ public class ConnectionFactoryConfigure {
         simpleMessageListenerContainer.setMaxConcurrentConsumers(1);
         simpleMessageListenerContainer.setConcurrentConsumers(1);
 
-        //设置确认模式手工确认
+        /***设置确认模式手工确认**/
         simpleMessageListenerContainer.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         simpleMessageListenerContainer.setMessageListener(messageConsumer());
         return simpleMessageListenerContainer;
@@ -166,12 +160,10 @@ public class ConnectionFactoryConfigure {
         return new MessageConsumer();
     }
 
+
     /**
-     queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象
-     * @date:2017/9/1
-     * @className:ConnectionFactory
-     * @author:Administrator
-     * @description:
+     * queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象
+     * @return
      */
     @Bean
     public SimpleMessageListenerContainer simpleMessageListenerContainer_two(){
@@ -181,18 +173,15 @@ public class ConnectionFactoryConfigure {
         simpleMessageListenerContainer.setMaxConcurrentConsumers(1);
         simpleMessageListenerContainer.setConcurrentConsumers(1);
 
-        //设置确认模式手工确认
+        /*****设置确认模式手工确认****/
         simpleMessageListenerContainer.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         simpleMessageListenerContainer.setMessageListener(messageConsumer2());
         return simpleMessageListenerContainer;
     }
 
     /**
-     定义消费者
-     * @date:2017/9/1
-     * @className:ConnectionFactory
-     * @author:Administrator
-     * @description:
+     * 定义消费者
+     * @return
      */
     @Bean
     public MessageConsumer2 messageConsumer2(){
@@ -234,5 +223,6 @@ public class ConnectionFactoryConfigure {
     public MsgSendConfirmCallBack msgSendConfirmCallBack(){
         return new MsgSendConfirmCallBack();
     }
+
 
 }

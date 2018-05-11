@@ -13,15 +13,16 @@ import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
  * @Version:1.0
  */
 public class MessageConsumer2 implements ChannelAwareMessageListener {
-    private Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
 
+    private Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
     @Override
     public void onMessage(Message message, com.rabbitmq.client.Channel channel) throws Exception {
         byte[] body = message.getBody();
-        System.out.println("收到消息2 : " + new String(body));
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false); //确认消息成功消费
+        System.out.println("收到bob发送的消息: " + new String(body));
+
+        /****确认消息成功消费*/
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
 
     }
-
 
 }
